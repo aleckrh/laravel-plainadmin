@@ -6,7 +6,7 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="title mb-30">
-                    <h2>{{ __('Dashboard') }}</h2>
+                    <h2>{{ __('About us') }}</h2>
                 </div>
             </div>
             <!-- end col -->
@@ -19,7 +19,7 @@
         <div class="card-style-3 mb-30">
             <div class="card-content">
                 <p>
-                    {{ __('You are logged in!') }}
+                    {{ __('Sample static text page ') }}
                 </p>
             </div>
         </div>

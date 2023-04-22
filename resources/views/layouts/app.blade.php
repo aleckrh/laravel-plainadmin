@@ -1,80 +1,136 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <!-- ========== All CSS files linkup ========= -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/lineicons.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/fullcalendar.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/materialdesignicons.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}" />
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<!-- ======== sidebar-nav start =========== -->
+<aside class="sidebar-nav-wrapper">
+    <div class="navbar-logo">
+        <a href="{{ route('home') }}">
+            <img src="{{ asset('images/logo/logo.svg') }}" alt="logo"/>
+        </a>
+    </div>
+    <nav class="sidebar-nav">
+        @include('layouts.navigation')
+    </nav>
+</aside>
+<div class="overlay"></div>
+<!-- ======== sidebar-nav end =========== -->
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+<!-- ======== main-wrapper start =========== -->
+<main class="main-wrapper">
+    <!-- ========== header start ========== -->
+    <header class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-6">
+                    <div class="header-left d-flex align-items-center">
+                        <div class="menu-toggle-btn mr-20">
+                            <button
+                                id="menu-toggle"
+                                class="main-btn primary-btn btn-hover"
+                            >
+                                <i class="lni lni-chevron-left me-2"></i> {{ __('Menu') }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-7 col-6">
+                    <div class="header-right">
+                        <!-- profile start -->
+                        <div class="profile-box ml-15">
+                            <button
+                                    class="dropdown-toggle bg-transparent border-0"
+                                    type="button"
+                                    id="profile"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                            >
+                                <div class="profile-info">
+                                    <div class="info">
+                                        <h6>{{ Auth::user()->name }}</h6>
+                                    </div>
                                 </div>
-                            </li>
-                        @endguest
-                    </ul>
+                                <i class="lni lni-chevron-down"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
+                                <li>
+                                    <a href="{{ route('profile.show') }}"> <i class="lni lni-user"></i> {{ __('My profile') }}</a>
+                                </li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();"> <i class="lni lni-exit"></i> {{ __('Logout') }}</a>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- profile end -->
+                    </div>
                 </div>
             </div>
-        </nav>
+        </div>
+    </header>
+    <!-- ========== header end ========== -->
 
-        <main class="py-4">
+    <!-- ========== section start ========== -->
+    <section class="section">
+        <div class="container-fluid">
             @yield('content')
-        </main>
-    </div>
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- ========== section end ========== -->
+
+    <!-- ========== footer start =========== -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 order-last order-md-first">
+                    <div class="copyright text-md-start">
+                        <p class="text-sm">
+                            Designed and Developed by
+                            <a
+                                    href="https://plainadmin.com"
+                                    rel="nofollow"
+                                    target="_blank"
+                            >
+                                PlainAdmin
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <!-- end col-->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </footer>
+    <!-- ========== footer end =========== -->
+</main>
+<!-- ======== main-wrapper end =========== -->
+
+<!-- ========= All Javascript files linkup ======== -->
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/Chart.min.js') }}"></script>
+<script src="{{ asset('js/dynamic-pie-chart.js') }}"></script>
+<script src="{{ asset('js/moment.min.js') }}"></script>
+<script src="{{ asset('js/fullcalendar.js') }}"></script>
+<script src="{{ asset('js/jvectormap.min.js') }}"></script>
+<script src="{{ asset('js/world-merc.js') }}"></script>
+<script src="{{ asset('js/polyfill.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>
