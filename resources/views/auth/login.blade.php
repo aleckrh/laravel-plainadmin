@@ -72,6 +72,15 @@
                                 </button>
                             </div>
                         </div>
+
+                        @if (Route::has('register'))
+                        <div class="singin-option pt-40">
+                            <p class="text-sm text-medium text-dark text-center">
+                                Don’t have any account yet?
+                                <a href="{{ route('register') }}">Create an account</a>
+                            </p>
+                        </div>
+                        @endif
                     </div>
                     <!-- end row -->
                 </form>

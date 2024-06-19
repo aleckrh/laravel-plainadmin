@@ -14,9 +14,14 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
 </head>
 <body>
-
-<div class="row g-0 auth-row">
-    @yield('content')
+<div class="min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-10">
+            <div class="row g-0 auth-row">
+                @yield('content')
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
