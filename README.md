@@ -12,9 +12,9 @@ PlainAdmin is an Open-source admin template
 
 ## Note
 
-Recommend to install this preset on a project that you are starting from scratch, otherwise your project's design might break.
+`❗` **IMPORTANT:**  Recommend to install this preset on a project that you are starting from scratch, otherwise your project's design might break.
 
-If you found this project useful, then please consider giving it a :star:
+`🤟` If you found this project useful, then please consider giving it a :star:
 
 ## Learn More
 
