@@ -2,6 +2,12 @@
 
 PlainAdmin is an Open-source admin template
 
+| Laravel Version | Branch | Support     |
+|-----------------|--------|-------------|
+| 12.0            | main   |             |
+| 11.0            | v11.0  |             |
+| 10.0            | v10.0  | End of life |
+
 ## Installation
 
 - Clone the repo and `cd` into it
